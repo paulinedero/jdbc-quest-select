@@ -4,6 +4,7 @@ import com.wildcodeschool.MyAppWithDB.repository.SchoolRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -19,7 +20,6 @@ public class SchoolController {
         return "school_get_all";
     }
 
-//    @GetMapping("/schools/school")
     @RequestMapping(value = "/schools/school", params = "id")
     public String getSchoolById(Model model, @RequestParam String id) {
 
@@ -28,12 +28,28 @@ public class SchoolController {
         return "school_get_all";
     }
 
-//    @GetMapping("/schools/school")
     @RequestMapping(value = "/schools/school", params = "country")
     public String getSchoolsByCountry(Model model, @RequestParam(required = false, defaultValue = "%") String country) {
 
         model.addAttribute("schools", schoolRepository.findSchoolsByCountry(country));
 
         return "school_get_all";
+    }
+
+    @GetMapping("/schools/add")
+    public String addWizard() {
+        return "school_post";
+    }
+
+    @PostMapping("/school/create")
+    public String postSchool(Model model,
+                             @RequestParam String schoolName,
+                             @RequestParam int capacity,
+                             @RequestParam String schoolCountry
+    ) {
+        model.addAttribute("school", schoolRepository.save(schoolName, capacity,
+                schoolCountry));
+
+        return "school_get";
     }
 }

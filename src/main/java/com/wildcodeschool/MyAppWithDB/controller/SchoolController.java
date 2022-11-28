@@ -67,4 +67,11 @@ public class SchoolController {
 
         return "school_get";
     }
+
+    /*DELETE*/
+    @GetMapping ("/school/delete")
+    public String deleteSchool(@RequestParam int id) {
+        schoolRepository.deleteSchoolById(id);
+        return "school_delete";
+    }
 }

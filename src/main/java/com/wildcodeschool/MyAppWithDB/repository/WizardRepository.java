@@ -13,7 +13,6 @@ public class WizardRepository {
 
     /**
      * Find all wizards
-     *
      * @return List<Wizard>
      */
     public List<Wizard> findAllWizards() {
@@ -50,7 +49,6 @@ public class WizardRepository {
 
     /**
      * Find wizard by id
-     *
      * @param id int
      * @return Wizard
      */
@@ -91,7 +89,6 @@ public class WizardRepository {
 
     /**
      * Find wizards by lastname
-     *
      * @param lastName String
      * @return List<Wizard>
      */
@@ -130,7 +127,6 @@ public class WizardRepository {
 
     /**
      * Insert new wizard in database
-     *
      * @param firstName  String
      * @param lastName   String
      * @param birthday   String
@@ -217,5 +213,31 @@ public class WizardRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * Delete wizard from database
+     * @param id int
+     */
+    public void deleteWizardById(int id) {
+
+        try {
+            Connection connection = DriverManager.getConnection(
+                    DB_URL, DB_USER, DB_PASSWORD
+            );
+
+            PreparedStatement statement = connection.prepareStatement(
+                    "DELETE FROM wizard WHERE id=?"
+            );
+
+            statement.setInt(1, id);
+
+            if (statement.executeUpdate() != 1) {
+                throw new SQLException("failed to delete data");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

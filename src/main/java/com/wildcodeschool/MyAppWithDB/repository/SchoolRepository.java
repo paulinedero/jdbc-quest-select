@@ -13,7 +13,6 @@ public class SchoolRepository {
 
     /**
      * Find all schools
-     *
      * @return List<School>
      */
     public List<School> findAllSchools() {
@@ -48,7 +47,6 @@ public class SchoolRepository {
 
     /**
      * Find school by id
-     *
      * @param id int
      * @return School
      */
@@ -86,7 +84,6 @@ public class SchoolRepository {
 
     /**
      * Find schools by country
-     *
      * @param country String
      * @return List<School>
      */
@@ -124,7 +121,6 @@ public class SchoolRepository {
 
     /**
      * Create new school in database
-     *
      * @param name String
      * @param capacity int
      * @param country String
@@ -167,7 +163,6 @@ public class SchoolRepository {
 
     /**
      * Update School in database
-     *
      * @param id int
      * @param name String
      * @param capacity int
@@ -198,5 +193,31 @@ public class SchoolRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * Delete wizard from database
+     * @param id int
+     */
+    public void deleteSchoolById(int id) {
+
+        try {
+            Connection connection = DriverManager.getConnection(
+                    DB_URL, DB_USER, DB_PASSWORD
+            );
+
+            PreparedStatement statement = connection.prepareStatement(
+                    "DELETE FROM school WHERE id=?"
+            );
+
+            statement.setInt(1, id);
+
+            if (statement.executeUpdate() != 1) {
+                throw new SQLException("failed to delete data");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

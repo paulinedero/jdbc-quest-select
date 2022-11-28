@@ -1,31 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>School</title>
+    <meta charset="UTF-8">
+    <title>Harry Potter Quest JDBC</title>
 </head>
 <body>
+
 <h1>Create new school</h1>
-<div>
-    <form action="/school/create" method="post">
 
-        <label for="school-name">Name:</label>
+<form action="/school/create" method="post">
+    <label for="school-name">Name:</label>
+    <input id="school-name" name="name" placeholder="Hogwarts" required type="text">
 
-        <input id="school-name" name="schoolName" placeholder="Hogwarts" required type="text">
+    <label for="school-capacity">Capacity:</label>
+    <input id="school-capacity" name="capacity" placeholder="450" required type="number">
 
-        <label for="school-capacity">Capacity:</label>
+    <label for="school-country">Country:</label>
+    <input id="school-country" name="country" placeholder="United Kingdom" required type="text">
 
-        <input id="school-capacity" name="capacity" placeholder="450" required type="number">
+    <input type="submit" value="Send">
+</form>
 
-
-        <label for="school-country">Country:</label>
-
-        <input id="school-country" name="schoolCountry" placeholder="United Kingdom" required type="text">
-
-        <input type="submit" value="Send">
-
-    </form>
-
-</div>
 </body>
 </html>

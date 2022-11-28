@@ -12,43 +12,58 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SchoolController {
     private SchoolRepository schoolRepository = new SchoolRepository();
 
+    /* GET */
     @GetMapping("/schools")
-    public String getAll(Model model) {
-
-        model.addAttribute("schools", schoolRepository.findAll());
-
+    public String getAllSchools(Model model) {
+        model.addAttribute("schools", schoolRepository.findAllSchools());
         return "school_get_all";
     }
 
     @RequestMapping(value = "/schools/school", params = "id")
-    public String getSchoolById(Model model, @RequestParam String id) {
-
+    public String getSchoolById(Model model, @RequestParam int id) {
         model.addAttribute("schools", schoolRepository.findSchoolById(id));
-
         return "school_get_all";
     }
 
     @RequestMapping(value = "/schools/school", params = "country")
     public String getSchoolsByCountry(Model model, @RequestParam(required = false, defaultValue = "%") String country) {
-
         model.addAttribute("schools", schoolRepository.findSchoolsByCountry(country));
-
         return "school_get_all";
     }
 
-    @GetMapping("/schools/add")
-    public String addWizard() {
+    /* POST */
+    @GetMapping("/school/create")
+    public String createSchool() {
         return "school_post";
     }
 
     @PostMapping("/school/create")
     public String postSchool(Model model,
-                             @RequestParam String schoolName,
+                             @RequestParam String name,
                              @RequestParam int capacity,
-                             @RequestParam String schoolCountry
+                             @RequestParam String country
     ) {
-        model.addAttribute("school", schoolRepository.save(schoolName, capacity,
-                schoolCountry));
+        model.addAttribute("school", schoolRepository.saveNewSchool(name, capacity,
+                country));
+
+        return "school_get";
+    }
+
+    /*PUT*/
+    @GetMapping("/school/update")
+    public String updateSchool(Model model, @RequestParam int id) {
+        model.addAttribute("school", schoolRepository.findSchoolById(id));
+        return "school_put";
+    }
+
+    @PostMapping("/school/update")
+    public String putSchool(Model model,
+                            @RequestParam int id,
+                            @RequestParam String name,
+                            @RequestParam int capacity,
+                            @RequestParam String country
+    ) {
+        model.addAttribute("school", schoolRepository.updateSchool(id, name, capacity, country));
 
         return "school_get";
     }

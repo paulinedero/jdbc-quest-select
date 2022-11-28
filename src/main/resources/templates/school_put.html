@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Harry Potter Quest JDBC</title>
+</head>
+<body>
+
+<h1>Update school</h1>
+
+<form action="/school/update" method="post">
+    <input th:value="${school.id}" name="id" type="hidden">
+
+    <label for="school-name">Name:</label>
+    <input th:value="${school.name}" id="school-name" name="name" placeholder="Hogwarts" required type="text">
+
+    <label for="school-capacity">Capacity:</label>
+    <input th:value="${school.capacity}" id="school-capacity" name="capacity" placeholder="450" required type="number">
+
+    <label for="school-country">Country:</label>
+    <input th:value="${school.country}" id="school-country" name="country" placeholder="United Kingdom" required type="text">
+
+    <input type="submit" value="Send">
+</form>
+
+</body>
+</html>

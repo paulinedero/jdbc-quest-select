@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Schools</title>
+    <meta charset="UTF-8">
+    <title>Harry Potter Quest JDBC</title>
 </head>
 <body>
+
+<h1>Schools</h1>
+
 <div>
-  <h1>Schools</h1>
-  <table>
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>Capacity</th>
-      <th>Country</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="school : ${schools}">
-      <td th:text="${school.name}"></td>
-      <td th:text="${school.capacity}"></td>
-      <td th:text="${school.country}"></td>
-    </tr>
-    </tbody>
-  </table>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Capacity</th>
+            <th>Country</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="school : ${schools}">
+            <td th:text="${school.name}"></td>
+            <td th:text="${school.capacity}"></td>
+            <td th:text="${school.country}"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
+
 </body>
 </html>
